@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"embed"
 	"flag"
 	"go/format"
 	"io/ioutil"
@@ -16,10 +17,14 @@ var (
 	configPath = flag.String("config", "./.stresscfg.yaml", "path to config file")
 )
 
+//go:embed selector.gotpl stated_method_wrapper.gotpl state.gotpl stress_storage.gotpl
+var f embed.FS
+
 func main() {
 	cfg := struct {
 		Parameters models.Params
 	}{}
+	flag.Parse()
 
 	data, err := ioutil.ReadFile(*configPath)
 	if err != nil {
@@ -28,11 +33,12 @@ func main() {
 	if err := yaml.Unmarshal(data, &cfg); err != nil {
 		panic(err)
 	}
-	tmpl, err := template.New("").ParseFiles(
-		"pkg/state_codegen/selector.gotpl",
-		"pkg/state_codegen/stated_method_wrapper.gotpl",
-		"pkg/state_codegen/state.gotpl",
-		"pkg/state_codegen/stress_storage.gotpl")
+	tmpl, err := template.New("").ParseFS(
+		f,
+		"selector.gotpl",
+		"stated_method_wrapper.gotpl",
+		"state.gotpl",
+		"stress_storage.gotpl")
 	if err != nil {
 		panic(err)
 	}

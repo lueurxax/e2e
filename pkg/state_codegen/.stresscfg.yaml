@@ -1,7 +1,7 @@
 parameters:
   client_name: "*Client"
   client_path: git.proksy.io/beep/backend/pkg/gatewayclient
-  path_to_generated: internal/pandora/tester/scenariostate/
+  path_to_generated: main
   fields:
     - name: access_token
       type: string
