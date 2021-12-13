@@ -6,9 +6,10 @@ import (
 )
 
 const (
-	intType      = "int"
-	stringType   = "string"
-	durationType = "time.Duration"
+	intType         = "int"
+	stringType      = "string"
+	durationType    = "time.Duration"
+	stringSliceType = "[]string"
 )
 
 type Field struct {
@@ -35,6 +36,10 @@ func (f *Field) IsInt() bool {
 
 func (f *Field) IsDuration() bool {
 	return f.Type == durationType
+}
+
+func (f *Field) IsStringSlice() bool {
+	return f.Type == stringSliceType
 }
 
 type Params struct {

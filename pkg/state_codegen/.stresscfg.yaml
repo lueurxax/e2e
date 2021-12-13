@@ -1,7 +1,7 @@
 parameters:
   client_name: "*Client"
   client_path: git.proksy.io/beep/backend/pkg/gatewayclient
-  path_to_generated: main
+  path_to_generated: main/
   fields:
     - name: access_token
       type: string
@@ -21,3 +21,5 @@ parameters:
       type: string
     - name: reg_code
       type: string
+    - name: tickers
+      type: "[]string"

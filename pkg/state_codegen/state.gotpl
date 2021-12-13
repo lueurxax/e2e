@@ -3,6 +3,7 @@ package scenariostate
 
 import (
 "time"
+"strings"
 
 uuid "github.com/satori/go.uuid"
 )
@@ -80,6 +81,8 @@ ok bool
         if err != nil {
         panic(err)
         }
+    {{else if $field.IsStringSlice}}
+        a := strings.Split(el.(string), ",")
     {{else}}a := el.({{ $field.Type }}){{end}}
     st.{{ $field.LowerName }} = &a
     }
