@@ -1,0 +1,70 @@
+package scenariostate
+
+import (
+	"context"
+	"fmt"
+
+	. "{{ .ClientPath }}"
+	"git.proksy.io/golang/e2e/pkg/models"
+)
+
+type method interface {
+	MethodName() (name string)
+	RequiredFields() (fields []string)
+	ReturnedFields() (fields []string)
+	Run(ctx context.Context, client {{.ClientName}}, state, newState MethodsState, opts *models.Options) error
+}
+
+type wrapper struct {
+	method
+
+	state   SuperState
+	clients map[string]{{.ClientName}}
+}
+
+func (w *wrapper) MethodName() (name string) {
+	return w.method.MethodName()
+}
+
+func (w *wrapper) RequiredFields() (fields []string) {
+	return w.method.RequiredFields()
+}
+
+func (w *wrapper) ReturnedFields() (fields []string) {
+	return w.method.ReturnedFields()
+}
+
+func (w *wrapper) Run(ctx context.Context, clientName string, selector models.StateSelector, opts *models.Options) (models.StateSelector, error) {
+	newState, newSelector := w.state.NewEmptyMethodsState(selector)
+	// Get client
+	client, ok := w.clients[clientName]
+	if !ok {
+		err := fmt.Errorf("unreachable error, client not found")
+		return nil, err
+	}
+	if err := w.method.Run(ctx, client, w.state.Select(selector), newState, opts); err != nil {
+		return nil, err
+	}
+	return newSelector, nil
+}
+
+type WrapperBuilder interface {
+	NewWrapper(method method) models.Tester
+}
+
+type wrapperBuilder struct {
+	state   SuperState
+	clients map[string]{{.ClientName}}
+}
+
+func (w *wrapperBuilder) NewWrapper(method method) models.Tester {
+	return &wrapper{
+		method:  method,
+		state:   w.state,
+		clients: w.clients,
+	}
+}
+
+func NewWrapperBuilder(state SuperState, clients map[string]{{.ClientName}}) WrapperBuilder {
+	return &wrapperBuilder{state: state, clients: clients}
+}

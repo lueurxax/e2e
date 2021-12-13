@@ -1,0 +1,118 @@
+package scenariostate
+
+import (
+uuid "github.com/satori/go.uuid"
+
+"git.proksy.io/golang/e2e/common"
+"git.proksy.io/golang/e2e/pkg/models"
+)
+
+// SuperState is slice of states
+type SuperState interface {
+Select(selector models.StateSelector) MethodsState
+NewEmptyMethodsState(models.StateSelector) (MethodsState, models.StateSelector)
+models.State
+}
+
+type stressStorage struct {
+memory []MethodsState
+first  bool
+}
+
+func (s *stressStorage) Select(selector models.StateSelector) MethodsState {
+return s.memory[selector.Index()]
+}
+
+func (s *stressStorage) NewEmptyMethodsState(selector models.StateSelector) (MethodsState, models.StateSelector) {
+var index int
+if s.first {
+index = selector.Index() + len(s.memory)/2
+} else {
+index = selector.Index() - len(s.memory)/2
+}
+s.memory[index] = NewEmptyMethodsState()
+return s.memory[index], newSelector(index)
+}
+
+func (s *stressStorage) Reset(size int) []models.StateSelector {
+s.memory = make([]MethodsState, size*2)
+selectors := make([]models.StateSelector, size)
+for i := 0; i < size; i++ {
+s.memory[i] = NewEmptyMethodsState()
+selectors[i] = newSelector(i)
+}
+s.first = true
+return selectors
+}
+
+func (s *stressStorage) AddToState(selectors []models.StateSelector, params ...map[string]interface{}) []models.StateSelector {
+st := NewEmptyMethodsState()
+res := make([]models.StateSelector, len(selectors))
+for _, param := range params {
+st.MergeToState(NewMethodsState(param))
+}
+start := s.start()
+for i, selector := range selectors {
+s.memory[start+i] = s.memory[selector.Index()].MergeToResult(st)
+res[i] = newSelector(start + i)
+}
+return res
+}
+
+// NewStates construct States
+func NewStates() (states SuperState) {
+return &stressStorage{}
+}
+
+// MergeToState merge new params to state
+func (s *stressStorage) MergeToState(params []models.StateSelector) {
+start := s.start()
+for i := 0; i < len(s.memory)/2; i++ {
+s.memory[i+start].MergeToState(s.memory[params[i].Index()])
+}
+s.first = !s.first
+}
+
+// MergeToStateRepeat merge repeatedly one new param to each state
+func (s *stressStorage) MergeToStateRepeat(param models.StateSelector) {
+for i := s.start(); i < len(s.memory)/2; i++ {
+s.memory[i].MergeToState(s.memory[param.Index()])
+}
+s.first = !s.first
+}
+
+// Prepare init generated values
+func (s *stressStorage) Prepare(initData common.InitState) {
+for _, field := range initData.Random {
+for i := 0; i < len(s.memory)/2; i++ {
+{{- range $field := .Fields }}
+    {{ if $field.IsString}}
+        if field == "{{$field.SnakeName}}" {
+        randUUID := uuid.NewV4()
+        s.memory[i].Set{{$field.Name}}(randUUID.String())
+        }
+    {{- end }}
+{{- end }}
+}
+}
+{{ if .HasInt}}
+    for _, field := range initData.Increment {
+    for i := 0; i < len(s.memory)/2; i++ {
+    {{- range $field := .Fields }}
+        {{ if $field.IsInt}}
+            if field == "{{$field.SnakeName}}" {
+            s.memory[i].Set{{$field.Name}}(strconv.Itoa(i))
+            }
+        {{- end }}
+    {{- end }}
+    }
+    }
+{{end}}
+}
+
+func (s *stressStorage) start() int {
+if !s.first {
+return len(s.memory) / 2
+}
+return 0
+}

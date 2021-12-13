@@ -1,0 +1,28 @@
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+    availableScenarios: [String!]!
+    completedScenarios: [CompletedTest!]!
+    lastReport: String
+}
+
+type Mutation {
+    runTest(scenarios: [String!]!): Boolean!
+}
+
+type Subscription {
+    currentLaunchInfo: CompletedTest!
+}
+
+type CompletedTest{
+    name: String!
+    status : Status!
+    error: String
+}
+
+enum Status {
+    COMPLETED
+    ABORTED
+    RUNNING
+}

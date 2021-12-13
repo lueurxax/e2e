@@ -1,0 +1,16 @@
+package scenariostate
+
+import "git.proksy.io/golang/e2e/pkg/models"
+
+type selector struct {
+index int
+}
+
+func (s *selector) Index() int {
+return s.index
+}
+
+func newSelector(index int) models.StateSelector {
+return &selector{index: index}
+}
+
