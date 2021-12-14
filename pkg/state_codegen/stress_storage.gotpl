@@ -1,6 +1,8 @@
 package scenariostate
 
 import (
+"strconv"
+
 uuid "github.com/satori/go.uuid"
 
 "git.proksy.io/golang/e2e/common"
@@ -95,19 +97,22 @@ for i := 0; i < len(s.memory)/2; i++ {
 {{- end }}
 }
 }
-{{ if .HasInt}}
-    for _, field := range initData.Increment {
-    for i := 0; i < len(s.memory)/2; i++ {
-    {{- range $field := .Fields }}
-        {{ if $field.IsInt}}
-            if field == "{{$field.SnakeName}}" {
-            s.memory[i].Set{{$field.Name}}(strconv.Itoa(i))
-            }
-        {{- end }}
+for _, field := range initData.Increment {
+for i := 0; i < len(s.memory)/2; i++ {
+{{- range $field := .Fields }}
+    {{ if $field.IsString}}
+        if field == "{{$field.SnakeName}}" {
+        s.memory[i].Set{{$field.Name}}(strconv.Itoa(i))
+        }
     {{- end }}
-    }
-    }
-{{end}}
+    {{ if $field.IsInt}}
+        if field == "{{$field.SnakeName}}" {
+        s.memory[i].Set{{$field.Name}}(i)
+        }
+    {{- end }}
+{{- end }}
+}
+}
 }
 
 func (s *stressStorage) start() int {
