@@ -70,9 +70,11 @@ return &stressStorage{}
 func (s *stressStorage) MergeToState(params []models.StateSelector) {
 start := s.start()
 for i := 0; i < len(s.memory)/2; i++ {
+if params[i] != nil {
 s.memory[i+start].MergeToState(s.memory[params[i].Index()])
 }
-s.first = !s.first
+}
+// s.first = !s.first
 }
 
 // MergeToStateRepeat merge repeatedly one new param to each state
@@ -80,7 +82,7 @@ func (s *stressStorage) MergeToStateRepeat(param models.StateSelector) {
 for i := s.start(); i < len(s.memory)/2; i++ {
 s.memory[i].MergeToState(s.memory[param.Index()])
 }
-s.first = !s.first
+// s.first = !s.first
 }
 
 // Prepare init generated values
