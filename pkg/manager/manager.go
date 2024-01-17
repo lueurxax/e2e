@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync/atomic"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/log"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/log"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 const (

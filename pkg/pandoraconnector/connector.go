@@ -11,9 +11,9 @@ import (
 	"github.com/yandex/pandora/core/schedule"
 	"go.uber.org/zap"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/log"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/log"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 const compositeScheduleKey = "composite"

@@ -1,8 +1,8 @@
 package testerspool
 
 import (
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 // TestersPool readonly pool of tester interfaces

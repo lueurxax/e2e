@@ -10,7 +10,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"git.proksy.io/golang/e2e/pkg/state_codegen/models"
+	"github.com/lueurxax/e2e/pkg/state_codegen/models"
 )
 
 var (

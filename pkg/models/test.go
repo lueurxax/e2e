@@ -1,6 +1,6 @@
 package models
 
-import "git.proksy.io/golang/e2e/common"
+import "github.com/lueurxax/e2e/common"
 
 // CompletedTest model
 type CompletedTest struct {
@@ -69,16 +69,19 @@ func (t *Test) Prepare() {
 }
 
 // compute shoot count by from, to and duration(only for line type)
-//         /|
-//        /*|
-//       /**|
-//      /***|
-//     /****|
-//     |****|to
+//
+//	    /|
+//	   /*|
+//	  /**|
+//	 /***|
+//	/****|
+//	|****|to
+//
 // from|****|
-//     |****|
-//    ______
-//    duration
+//
+//	 |****|
+//	______
+//	duration
 func (t *Test) computeShootCount() {
 	if t.StressLoad == nil {
 		return

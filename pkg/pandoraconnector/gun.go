@@ -6,8 +6,8 @@ import (
 	"github.com/yandex/pandora/core"
 	"github.com/yandex/pandora/core/register"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 // S3Gun is gun name for test s3

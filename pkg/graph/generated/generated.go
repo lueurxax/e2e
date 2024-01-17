@@ -16,7 +16,7 @@ import (
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 // region    ************************** generated!.gotpl **************************
