@@ -5,12 +5,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/log"
-	"git.proksy.io/golang/e2e/pkg/models"
-	"git.proksy.io/golang/e2e/pkg/pandoraconnector"
-	"git.proksy.io/golang/e2e/pkg/testerspool"
-	"git.proksy.io/golang/e2e/pkg/workerspool"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/log"
+	"github.com/lueurxax/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/pandoraconnector"
+	"github.com/lueurxax/e2e/pkg/testerspool"
+	"github.com/lueurxax/e2e/pkg/workerspool"
 )
 
 // Processor interface process tests

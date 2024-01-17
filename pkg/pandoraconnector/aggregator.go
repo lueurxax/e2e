@@ -5,8 +5,8 @@ import (
 
 	"github.com/yandex/pandora/core"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/log"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/log"
 )
 
 const s3Aggregator = "rest_aggregator"

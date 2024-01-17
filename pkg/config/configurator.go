@@ -6,8 +6,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 // Configurator read and init config for work with e2e framework

@@ -3,10 +3,10 @@ package processor
 import (
 	"context"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/log"
-	"git.proksy.io/golang/e2e/pkg/models"
-	"git.proksy.io/golang/e2e/pkg/testerspool"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/log"
+	"github.com/lueurxax/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/testerspool"
 )
 
 // StageProcessor interface process test stage

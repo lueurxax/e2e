@@ -3,8 +3,8 @@ package workerspool
 import (
 	"context"
 
-	"git.proksy.io/golang/e2e/common"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/common"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 // Worker interface for processing stage

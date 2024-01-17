@@ -3,8 +3,8 @@ package graph
 import (
 	"fmt"
 
-	"git.proksy.io/golang/e2e/pkg/log"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/log"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 //go:generate go run ../scripts/gqlgen.go

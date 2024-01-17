@@ -1,7 +1,7 @@
 package manager
 
 import (
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 type task struct {

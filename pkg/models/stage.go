@@ -1,6 +1,6 @@
 package models
 
-import "git.proksy.io/golang/e2e/common"
+import "github.com/lueurxax/e2e/common"
 
 // Stage of test scenario
 type Stage struct {

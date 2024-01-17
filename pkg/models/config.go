@@ -1,6 +1,6 @@
 package models
 
-import "git.proksy.io/golang/e2e/common"
+import "github.com/lueurxax/e2e/common"
 
 // Config of config structure
 type Config struct {

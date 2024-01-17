@@ -7,7 +7,7 @@ import (
 	pandoraconfig "github.com/yandex/pandora/core/config"
 	"github.com/yandex/pandora/core/engine"
 
-	"git.proksy.io/golang/e2e/common"
+	"github.com/lueurxax/e2e/common"
 )
 
 // TODO will replaced with constructor for engine.Config

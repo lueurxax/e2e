@@ -6,8 +6,8 @@ package graph
 import (
 	"context"
 
-	"git.proksy.io/golang/e2e/pkg/graph/generated"
-	"git.proksy.io/golang/e2e/pkg/models"
+	"github.com/lueurxax/e2e/pkg/graph/generated"
+	"github.com/lueurxax/e2e/pkg/models"
 )
 
 func (r *completedTestResolver) Name(ctx context.Context, obj *models.CompletedTest) (string, error) {
