@@ -8,6 +8,15 @@ import (
 	"strconv"
 )
 
+type Mutation struct {
+}
+
+type Query struct {
+}
+
+type Subscription struct {
+}
+
 type Status string
 
 const (
