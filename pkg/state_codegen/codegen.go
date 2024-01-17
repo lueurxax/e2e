@@ -5,7 +5,7 @@ import (
 	"embed"
 	"flag"
 	"go/format"
-	"io/ioutil"
+	"os"
 	"text/template"
 
 	"gopkg.in/yaml.v3"
@@ -26,7 +26,7 @@ func main() {
 	}{}
 	flag.Parse()
 
-	data, err := ioutil.ReadFile(*configPath)
+	data, err := os.ReadFile(*configPath)
 	if err != nil {
 		panic(err)
 	}
@@ -72,5 +72,5 @@ func execute(tmpl *template.Template, path, name string, params models.Params) e
 		return err
 	}
 
-	return ioutil.WriteFile(path+name+".go", res, 0600)
+	return os.WriteFile(path+name+".go", res, 0600)
 }
