@@ -78,13 +78,15 @@ ok bool
 {{- range $field := .Fields }}
     el, ok = params[{{ $field.Name }}Key]
     if ok {
-    {{ if $field.IsDuration}}
-        a, err := time.ParseDuration(el.(string) + "h")
+    {{ if $field.IsDuration}}a, err := time.ParseDuration(el.(string) + "h")
         if err != nil {
         panic(err)
         }
-    {{else if $field.IsStringSlice}}
-        a := strings.Split(el.(string), ",")
+    {{else if $field.IsTime}}a, err := time.Parse(time.RFC3339, el.(string))
+        if err != nil {
+        panic(err)
+        }
+    {{else if $field.IsStringSlice}}a := strings.Split(el.(string), ",")
     {{else}}a := el.({{ $field.Type }}){{end}}
     st.{{ $field.LowerName }} = &a
     }

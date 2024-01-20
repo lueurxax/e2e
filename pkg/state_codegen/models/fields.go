@@ -9,6 +9,7 @@ const (
 	intType         = "int"
 	stringType      = "string"
 	durationType    = "time.Duration"
+	timeType        = "time.Time"
 	stringSliceType = "[]string"
 )
 
@@ -28,6 +29,10 @@ func (f *Field) Name() string {
 
 func (f *Field) IsString() bool {
 	return f.Type == stringType
+}
+
+func (f *Field) IsTime() bool {
+	return f.Type == timeType
 }
 
 func (f *Field) IsInt() bool {

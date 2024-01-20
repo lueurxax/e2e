@@ -1,6 +1,6 @@
 parameters:
   client_name: "*Client"
-  client_path: git.proksy.io/beep/backend/pkg/gatewayclient
+  client_path: github.com/example
   path_to_generated: main/
   fields:
     - name: access_token
@@ -23,3 +23,5 @@ parameters:
       type: string
     - name: tickers
       type: "[]string"
+    - name: time
+      type: time.Time
